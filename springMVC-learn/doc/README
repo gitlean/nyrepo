@@ -1,0 +1,75 @@
+http://localhost:8080/springMVC-learn/mvc/index
+
+http://localhost:8080/springMVC-learn/mvc/second
+
+http://localhost:8080/springMVC-learn/mvc/third
+
+
+http://localhost:8080/springMVC-learn/a/second
+
+
+
+
+----------------------------------
+
+
+@RequestParam
+
+	//http://localhost:8080/nacos-spring-demo/adacon/sOne?word=USA
+	//默认参数名和方法形参一样
+    @RequestMapping(value = "/sOne", method = RequestMethod.GET)
+    @ResponseBody
+    public String sayOne(@RequestParam String word)  {
+        return "hello " + word;
+    }
+    
+    //http://localhost:8080/nacos-spring-demo/adacon/sTwo?mpara=British
+    @RequestMapping(value = "/sTwo", method = RequestMethod.GET)
+    @ResponseBody
+    public String sayTwo(@RequestParam(value="mpara") String word)  {//如果形参和url @RequestMapping 的参数名不一样，则需显示
+        return "hello " + word;
+    }
+    
+    
+    
+@PathVariable
+
+	
+	//http://localhost:8080/nacos-spring-demo/adacon/jerry
+	@RequestMapping(value = "/{name}", method = RequestMethod.GET)
+	@ResponseBody
+	public String sayThree(@PathVariable String name) {
+	    
+	    return "hello "+name;
+	}
+
+
+	//http://localhost:8080/nacos-spring-demo/adacon/say/tom
+	@RequestMapping(value = "/say/{name}", method = RequestMethod.GET)
+	@ResponseBody
+	public String sayFour(@PathVariable("name") String p) { //如果形参和url @RequestMapping 的参数名不一样，则需显示
+	    
+	    return "say "+p;
+	}
+
+
+@RequestBody
+	@RequestMapping("/oauth/token")
+	public Object getAccessToken(@RequestBody LoginPara loginPara)
+	
+
+
+
+@ModelAttribute
+
+	@ResponseBody
+	//@RequestMapping(value="/model",consumes = "application/json",method=RequestMethod.POST)  
+    @RequestMapping(value="/model")  
+    public RequestModel model(@ModelAttribute("rqm") RequestModel rqm ) {  
+        System.out.println(rqm.getUsername());
+        System.out.println(rqm.getPassword());
+        System.out.println(rqm.toString());
+        return rqm;  
+    } 
+
+
